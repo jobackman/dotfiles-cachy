@@ -24,22 +24,13 @@ hl.bind(mainMod .. " + Tab",   hl.dsp.exec_cmd(noctCall .. "window-switcher"))
 hl.bind("ALT + Tab",           hl.dsp.exec_cmd(noctCall .. "window-switcher"))
 
 -- Move active window around workspaces & monitors
-hl.bind(mainMod .. " + SHIFT + Up",                   hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + SHIFT + Right",                hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + SHIFT + Left",                 hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + SHIFT + Down",                 hl.dsp.window.move({ direction = "d" }))
-hl.bind(mainMod .. " + SHIFT + 1",                    hl.dsp.window.move({ monitor = MONITOR1 }))
-hl.bind(mainMod .. " + SHIFT + 2",                    hl.dsp.window.move({ monitor = MONITOR2 }))
-hl.bind(mainMod .. " + SHIFT + mouse_up",             hl.dsp.window.move({ monitor   = "-1" }))
-hl.bind(mainMod .. " + SHIFT + mouse_down",           hl.dsp.window.move({ monitor   = "+1" }))
-hl.bind(mainMod .. " + CONTROL + ALT + Right",      hl.dsp.window.move({ workspace = "m+1" }))
-hl.bind(mainMod .. " + CONTROL + ALT + Left",       hl.dsp.window.move({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + ALT + mouse_up",   hl.dsp.window.move({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + ALT + mouse_down", hl.dsp.window.move({ workspace = "m+1" }))
-for i = 1, NUM_WPM do
-    local key = i % 10
-    hl.bind(mainMod .. " + CONTROL + ALT +" .. key, hl.dsp.window.move({ workspace = "m~" .. i }))
-end
+hl.bind(mainMod .. " + CONTROL + Up",    hl.dsp.window.move({ direction = "u" }))
+hl.bind(mainMod .. " + CONTROL + Right", hl.dsp.window.move({ direction = "r" }))
+hl.bind(mainMod .. " + CONTROL + Left",  hl.dsp.window.move({ direction = "l" }))
+hl.bind(mainMod .. " + CONTROL + Down",  hl.dsp.window.move({ direction = "d" }))
+hl.bind(mainMod .. " + CONTROL + ALT + Right", hl.dsp.window.move({ workspace = "m+1" }))
+hl.bind(mainMod .. " + CONTROL + ALT + Left",  hl.dsp.window.move({ workspace = "m-1" }))
+hl.bind(mainMod .. " + CONTROL + ALT + Down",  hl.dsp.window.move({ workspace = "emptym" }))
 
 -- Move & Resize with mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
@@ -109,33 +100,22 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-cen
 ---- WORKSPACES & MONITORS ----
 -------------------------------
 
--- Focus on monitors
--- hl.bind(mainMod .. " + 1", hl.dsp.focus({ monitor = MONITOR1 }))
--- hl.bind(mainMod .. " + 2", hl.dsp.focus({ monitor = MONITOR2 }))
--- hl.bind(mainMod .. " + 3", hl.dsp.focus({ monitor = MONITOR3 }))
-
--- Focus on workspace number
--- Absolute
+-- Modifier model: Ctrl moves windows, Alt changes workspaces, Ctrl+Alt moves windows between workspaces.
+-- Focus or move to the numbered workspace slot on the current monitor.
 for i = 1, NUM_WPM do
     local key = i % 10
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-end
--- Relative
-for i = 1, NUM_WPM do
-    local key = i % 10
-    hl.bind(mainMod .. " + CONTROL + " .. key, hl.dsp.focus({ workspace = "m~" .. i }))
+    hl.bind(mainMod .. " + " .. key,               hl.dsp.focus({ workspace = "m~" .. i }))
+    hl.bind(mainMod .. " + CONTROL + ALT + " .. key, hl.dsp.window.move({ workspace = "m~" .. i }))
 end
 
 -- Move to adjacent workspaces and next empty on a given monitor
-hl.bind(mainMod .. " + CONTROL + Right",       hl.dsp.focus({ workspace = "m+1" }))
-hl.bind(mainMod .. " + CONTROL + Left",        hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + Down",        hl.dsp.focus({ workspace = "emptym" }))
+hl.bind(mainMod .. " + ALT + Right", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + ALT + Left",  hl.dsp.focus({ workspace = "m-1" }))
+hl.bind(mainMod .. " + ALT + Down",  hl.dsp.focus({ workspace = "emptym" }))
 
--- Scroll through existing workspaces & monitors
-hl.bind(mainMod .. " + mouse_down",           hl.dsp.focus({ workspace = "m+1" }))
-hl.bind(mainMod .. " + mouse_up",             hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + mouse_up",   hl.dsp.focus({ workspace = "m+1" }))
-hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m-1" }))
+-- Scroll through workspaces on the focused monitor.
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "m-1" }))
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
