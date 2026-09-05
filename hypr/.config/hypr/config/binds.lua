@@ -28,7 +28,7 @@ hl.bind(mainMod .. " + CONTROL + Up",    hl.dsp.window.move({ direction = "u" })
 hl.bind(mainMod .. " + CONTROL + Right", hl.dsp.window.move({ direction = "r" }))
 hl.bind(mainMod .. " + CONTROL + Left",  hl.dsp.window.move({ direction = "l" }))
 hl.bind(mainMod .. " + CONTROL + Down",  hl.dsp.window.move({ direction = "d" }))
-hl.bind(mainMod .. " + CONTROL + ALT + Right", hl.dsp.window.move({ workspace = "m+1" }))
+hl.bind(mainMod .. " + CONTROL + ALT + Right", hl.dsp.window.move({ workspace = "emptym" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Left",  hl.dsp.window.move({ workspace = "m-1" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Down",  hl.dsp.window.move({ workspace = "emptym" }))
 
