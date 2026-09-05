@@ -30,6 +30,7 @@ hl.bind(mainMod .. " + CONTROL + Left",  hl.dsp.window.move({ direction = "l" })
 hl.bind(mainMod .. " + CONTROL + Down",  hl.dsp.window.move({ direction = "d" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Right", hl.dsp.window.move({ workspace = "m+1" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Left",  hl.dsp.window.move({ workspace = "m-1" }))
+hl.bind(mainMod .. " + CONTROL + ALT + Up",    hl.dsp.window.move({ workspace = "previous" }))
 hl.bind(mainMod .. " + CONTROL + ALT + Down",  hl.dsp.window.move({ workspace = "emptym" }))
 
 -- Move & Resize with mouse
@@ -111,6 +112,7 @@ end
 -- Move to adjacent workspaces and next empty on a given monitor
 hl.bind(mainMod .. " + ALT + Right", hl.dsp.focus({ workspace = "m+1" }))
 hl.bind(mainMod .. " + ALT + Left",  hl.dsp.focus({ workspace = "m-1" }))
+hl.bind(mainMod .. " + ALT + Up",    hl.dsp.focus({ workspace = "previous" }))
 hl.bind(mainMod .. " + ALT + Down",  hl.dsp.focus({ workspace = "emptym" }))
 
 -- Scroll through workspaces on the focused monitor.
