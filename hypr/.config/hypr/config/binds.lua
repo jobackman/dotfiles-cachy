@@ -8,8 +8,9 @@ local launchPrefix = "uwsm app -- " -- if you are not using UWSM, make this empt
 
 -- Window manipulation
 hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
-hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + CONTROL + Return", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + CONTROL + C",      hl.dsp.window.center())
+hl.bind(mainMod .. " + CONTROL + P",      hl.dsp.window.pin())
 hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + J",           hl.dsp.layout("togglesplit"))
