@@ -1,0 +1,12 @@
+# Editor and temporary files
+*~
+*.bak
+*.swp
+
+# Never version Fish universal variables or dotenv files.
+**/fish_variables
+**/.env
+**/.env.*
+
+# Noctalia generates this theme from its own tracked configuration.
+terminal/.config/kitty/themes/noctalia.conf

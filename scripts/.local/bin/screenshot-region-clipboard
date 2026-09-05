@@ -1,0 +1,12 @@
+#!/bin/sh
+
+image=$(mktemp "${XDG_RUNTIME_DIR:-/tmp}/screenshot-region.XXXXXX.png") || exit 1
+trap 'rm -f "$image"' EXIT
+
+tee "$image" > /dev/null || exit 1
+wl-copy --type image/png < "$image"
+
+action=$(notify-send --app-name="Screenshot" --icon="$image" --expire-time=10000 \
+    --action=edit="Open in Satty" "Screenshot copied" "The selected region is ready to paste.")
+
+[ "$action" = "edit" ] && satty --filename "$image"
