@@ -4,6 +4,30 @@ Selective, public-safe configuration for this CachyOS/Hyprland system. The
 repository uses [GNU Stow](https://www.gnu.org/software/stow/) to create
 symlinks in the home directory.
 
+## TL;DR
+
+```sh
+cd ~/git/dotfiles
+
+# First-time Hyprland setup: prevent Stow from folding its config directory.
+mkdir -p "$HOME/.config/hypr/config"
+
+# Preview changes without modifying the home directory.
+stow --simulate --verbose=2 --target "$HOME" hypr noctalia shell terminal tools scripts
+
+# Create or refresh all symlinks.
+stow --restow --target "$HOME" hypr noctalia shell terminal tools scripts
+
+# Remove one package's symlinks without deleting repository files.
+stow --delete --target "$HOME" terminal
+
+# Review and record configuration changes.
+git status
+git diff
+git add <paths>
+git commit -m "Describe the change"
+```
+
 ## Layout
 
 Each top-level directory is a Stow package. Its contents mirror their target
@@ -80,6 +104,3 @@ Fish `fish_variables` are intentionally excluded.
 
 Noctalia generates `~/.config/kitty/themes/noctalia.conf`; it is excluded and
 will be recreated when Noctalia applies its theme.
-
-The initial pre-Stow backup is stored outside this repository at
-`~/.local/share/dotfiles-backups/20260905T181244Z/`.
