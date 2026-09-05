@@ -30,6 +30,8 @@ Clone the repository, then preview every package before making changes:
 
 ```sh
 cd ~/git/dotfiles
+# Hyprland requires its config directory to be a real directory, not a folded symlink.
+mkdir -p "$HOME/.config/hypr/config"
 stow --simulate --verbose=2 --target "$HOME" hypr noctalia shell terminal tools scripts
 ```
 
@@ -38,6 +40,10 @@ If the preview is clean, create or refresh the symlinks:
 ```sh
 stow --restow --target "$HOME" hypr noctalia shell terminal tools scripts
 ```
+
+Keep `~/.config/hypr/config` in place when restowing the `hypr` package. This
+causes Stow to link the individual configuration files rather than folding
+`~/.config/hypr` into one directory symlink, which Hyprland cannot load.
 
 Stow will not replace conflicting files. Back up, remove, or move any
 conflicting target before running the non-simulated command. To remove a
