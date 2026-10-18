@@ -9,8 +9,8 @@ symlinks in the home directory.
 ```sh
 cd ~/git/dotfiles
 
-# First-time Hyprland setup: prevent Stow from folding its config directory.
-mkdir -p "$HOME/.config/hypr/config"
+# Keep Hyprland and Zed config directories local instead of folded symlinks.
+mkdir -p "$HOME/.config/hypr/config" "$HOME/.config/zed"
 
 # Preview changes without modifying the home directory.
 stow --simulate --verbose=2 --target "$HOME" hypr noctalia shell terminal tools scripts
@@ -39,7 +39,7 @@ paths below `$HOME`.
 | `noctalia` | Noctalia Shell configuration |
 | `shell` | Bash, Zsh, and Fish startup configuration |
 | `terminal` | Kitty configuration |
-| `tools` | Btop, Micro, and Mise configuration |
+| `tools` | Micro, Mise, and Zed configuration (settings and keybindings) |
 | `scripts` | Personal scripts in `~/.local/bin` |
 
 ## Install
@@ -54,8 +54,8 @@ Clone the repository, then preview every package before making changes:
 
 ```sh
 cd ~/git/dotfiles
-# Hyprland requires its config directory to be a real directory, not a folded symlink.
-mkdir -p "$HOME/.config/hypr/config"
+# Keep Hyprland and Zed config directories local instead of folded symlinks.
+mkdir -p "$HOME/.config/hypr/config" "$HOME/.config/zed"
 stow --simulate --verbose=2 --target "$HOME" hypr noctalia shell terminal tools scripts
 ```
 
@@ -68,6 +68,10 @@ stow --restow --target "$HOME" hypr noctalia shell terminal tools scripts
 Keep `~/.config/hypr/config` in place when restowing the `hypr` package. This
 causes Stow to link the individual configuration files rather than folding
 `~/.config/hypr` into one directory symlink, which Hyprland cannot load.
+
+Keep `~/.config/zed` as a real directory too, so only its settings and keymap
+are symlinked. Generated themes and other local Zed files should stay outside
+this repository.
 
 Stow will not replace conflicting files. Back up, remove, or move any
 conflicting target before running the non-simulated command. To remove a
@@ -102,5 +106,6 @@ add credentials, API tokens, private keys, SSH or GnuPG data, browser profiles,
 application databases, caches, histories, or machine state. `.gitconfig` and
 Fish `fish_variables` are intentionally excluded.
 
-Noctalia generates `~/.config/kitty/themes/noctalia.conf`; it is excluded and
-will be recreated when Noctalia applies its theme.
+Noctalia generates `~/.config/kitty/themes/noctalia.conf` and
+`~/.config/zed/themes/noctalia.json`; both are excluded and will be recreated
+when Noctalia applies its theme.

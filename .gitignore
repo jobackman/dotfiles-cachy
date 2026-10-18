@@ -8,5 +8,6 @@
 **/.env
 **/.env.*
 
-# Noctalia generates this theme from its own tracked configuration.
+# Noctalia generates these themes from its own tracked configuration.
 terminal/.config/kitty/themes/noctalia.conf
+tools/.config/zed/themes/noctalia.json
