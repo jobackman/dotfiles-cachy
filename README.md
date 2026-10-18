@@ -99,12 +99,39 @@ To add a configuration, create the matching path inside a package, back up the
 live target, preview with `stow --simulate`, then apply with `stow --restow`.
 Use a new package when the configuration is independently useful.
 
+## Noctalia saved settings
+
+GUI preferences live in `~/.local/state/noctalia/settings.toml`; never symlink
+that raw file into this repository. The Python 3.11+ scripts export approved
+appearance/layout settings, omitting API keys, calendar accounts, location,
+wallpaper paths, and unapproved plugin fields. Histories and caches are ignored.
+
+```sh
+# Test an export, inspect the JSON, then preview restoring it.
+./scripts/.local/bin/noctalia-settings-export --snapshot /tmp/noctalia-settings.json
+./scripts/.local/bin/noctalia-settings-import --snapshot /tmp/noctalia-settings.json
+
+# Save a reviewed snapshot in the Stow package.
+./scripts/.local/bin/noctalia-settings-export \
+  --snapshot noctalia/.local/share/dotfiles/noctalia/settings.json
+```
+
+Review commands, URLs, and other free-form text before publishing; automated
+checks cannot catch every secret. After restowing, both commands default to
+`~/.local/share/dotfiles/noctalia/settings.json` and can be run by name.
+
+Import previews by default. **Stop Noctalia before using `--apply`**, then
+restart it afterward. Applying merges preferences while preserving local
+credentials, replaces lists, and creates a private backup beside the live
+settings. TOML comments/formatting are not preserved. Use `--help` for options.
+
 ## Public repository policy
 
 Only deliberately reviewed, non-sensitive configuration belongs here. Do not
 add credentials, API tokens, private keys, SSH or GnuPG data, browser profiles,
-application databases, caches, histories, or machine state. `.gitconfig` and
-Fish `fish_variables` are intentionally excluded.
+application databases, caches, histories, or unreviewed machine state. The
+sanitized Noctalia snapshot above is an intentional exception. `.gitconfig`
+and Fish `fish_variables` are intentionally excluded.
 
 Noctalia generates `~/.config/kitty/themes/noctalia.conf` and
 `~/.config/zed/themes/noctalia.json`; both are excluded and will be recreated

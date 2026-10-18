@@ -1,3 +1,10 @@
+# Python test/import artifacts
+__pycache__/
+*.pyc
+
+# Raw Noctalia state must never be tracked (use the sanitized snapshot).
+noctalia/.local/state/noctalia/
+
 # Editor and temporary files
 *~
 *.bak
